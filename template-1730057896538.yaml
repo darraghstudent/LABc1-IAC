@@ -1,0 +1,427 @@
+Metadata:
+  TemplateId: arn:aws:cloudformation:eu-west-1:122610520005:generatedTemplate/6f01538b-ac25-4d7b-b5a7-a81d101a5f98
+Resources:
+  EC2VolumeAttachment00vol0e02095bc65b7bd9700MlYRA:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::VolumeAttachment
+    DeletionPolicy: Retain
+    Properties:
+      InstanceId: i-0f4c36e62c9edfd35
+      VolumeId: vol-0e02095bc65b7bd97
+      Device: /dev/xvda
+  EC2Instance00i0f4c36e62c9edfd3500czFli:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Instance
+    DeletionPolicy: Retain
+    Properties:
+      Tenancy: default
+      SecurityGroups:
+        - Jump-box-sg
+      PrivateIpAddress: 10.0.0.14
+      InstanceInitiatedShutdownBehavior: stop
+      CpuOptions:
+        ThreadsPerCore: 1
+        CoreCount: 1
+      BlockDeviceMappings:
+        - Ebs:
+            SnapshotId: snap-04ebb579391521077
+            VolumeType: gp3
+            Iops: 3000
+            VolumeSize: 8
+            Encrypted: false
+            DeleteOnTermination: true
+          DeviceName: /dev/xvda
+      AvailabilityZone: eu-west-1a
+      PrivateDnsNameOptions:
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+        EnableResourceNameDnsAAAARecord: false
+      SubnetId: !Ref EC2Subnet00subnet0540d43c0f119dacd00s9TPv
+      SecurityGroupIds:
+        - sg-04f0952369daf5d5c
+      EbsOptimized: false
+      DisableApiTermination: false
+      KeyName: private-subnet
+      SourceDestCheck: true
+      Volumes:
+        - VolumeId: vol-0e02095bc65b7bd97
+          Device: /dev/xvda
+      PlacementGroupName: ''
+      VpcId: vpc-026dccf46393269f9
+      State:
+        Code: '16'
+        Name: running
+      NetworkInterfaces:
+        - PrivateIpAddresses:
+            - PrivateIpAddress: 10.0.0.14
+              Primary: true
+          SecondaryPrivateIpAddressCount: 0
+          DeviceIndex: '0'
+          GroupSet:
+            - !Ref EC2SecurityGroup00sg04f0952369daf5d5c00Knhf4
+          Ipv6Addresses: []
+          SubnetId: !Ref EC2Subnet00subnet0540d43c0f119dacd00s9TPv
+          AssociatePublicIpAddress: true
+          NetworkInterfaceId: !Ref EC2NetworkInterface00eni06ffba69f517448b500zpYti
+          DeleteOnTermination: true
+      ImageId: ami-00385a401487aefa4
+      InstanceType: t2.micro
+      Monitoring: false
+      Tags:
+        - Value: Jump-box
+          Key: Name
+      CreditSpecification:
+        CPUCredits: standard
+  EC2Instance00i013c99ecdd4ba670a007XBAh:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Instance
+    DeletionPolicy: Retain
+    Properties:
+      Tenancy: default
+      SecurityGroups:
+        - Private_subnet_1
+      PrivateIpAddress: 10.0.0.21
+      InstanceInitiatedShutdownBehavior: stop
+      CpuOptions:
+        ThreadsPerCore: 1
+        CoreCount: 1
+      BlockDeviceMappings:
+        - Ebs:
+            SnapshotId: snap-04ebb579391521077
+            VolumeType: gp3
+            Iops: 3000
+            VolumeSize: 8
+            Encrypted: false
+            DeleteOnTermination: true
+          DeviceName: /dev/xvda
+      AvailabilityZone: eu-west-1a
+      PrivateDnsNameOptions:
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+        EnableResourceNameDnsAAAARecord: false
+      SubnetId: !Ref EC2Subnet00subnet0cc4665066b38a52f00vKUq3
+      SecurityGroupIds:
+        - sg-06f75d7e668ff1a0f
+      EbsOptimized: false
+      DisableApiTermination: false
+      KeyName: private-subnet
+      SourceDestCheck: true
+      Volumes:
+        - VolumeId: vol-01fa25710e8a64b4b
+          Device: /dev/xvda
+      PlacementGroupName: ''
+      VpcId: vpc-026dccf46393269f9
+      State:
+        Code: '16'
+        Name: running
+      NetworkInterfaces:
+        - PrivateIpAddresses:
+            - PrivateIpAddress: 10.0.0.21
+              Primary: true
+          SecondaryPrivateIpAddressCount: 0
+          DeviceIndex: '0'
+          GroupSet:
+            - !Ref EC2SecurityGroup00sg06f75d7e668ff1a0f00PlMgU
+          Ipv6Addresses: []
+          SubnetId: !Ref EC2Subnet00subnet0cc4665066b38a52f00vKUq3
+          AssociatePublicIpAddress: false
+          NetworkInterfaceId: !Ref EC2NetworkInterface00eni00c210c0fb9f39c5900sBHZh
+          DeleteOnTermination: true
+      ImageId: ami-00385a401487aefa4
+      InstanceType: t2.micro
+      Monitoring: false
+      Tags:
+        - Value: Private_instance
+          Key: Name
+      CreditSpecification:
+        CPUCredits: standard
+  EC2Route00rtb0f506f4175b3f831a00Nv9pc:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Route
+    DeletionPolicy: Retain
+    Properties:
+      RouteTableId: !Ref EC2RouteTable00rtb0f506f4175b3f831a00mKq7T
+      DestinationCidrBlock: !GetAtt EC2VPC00vpc026dccf46393269f9008cTvV.CidrBlock
+      GatewayId: local
+      VpcEndpointId: local
+  EC2NetworkInterface00eni00c210c0fb9f39c5900sBHZh:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::NetworkInterface
+    DeletionPolicy: Retain
+    Properties:
+      Description: ''
+      PrivateIpAddress: 10.0.0.21
+      PrivateIpAddresses:
+        - PrivateIpAddress: 10.0.0.21
+          Primary: true
+      SecondaryPrivateIpAddressCount: 0
+      Ipv6PrefixCount: 0
+      Ipv4Prefixes: []
+      Ipv4PrefixCount: 0
+      GroupSet:
+        - sg-06f75d7e668ff1a0f
+      Ipv6Prefixes: []
+      SubnetId: !Ref EC2Subnet00subnet0cc4665066b38a52f00vKUq3
+      SourceDestCheck: true
+      InterfaceType: interface
+      Tags: []
+  EC2Route00rtb0d06ddd97b897dd4800Z1kDh:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Route
+    DeletionPolicy: Retain
+    Properties:
+      RouteTableId: !Ref EC2RouteTable00rtb0d06ddd97b897dd4800zMJKD
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref EC2InternetGateway00igw014f7407ce6d6914c00fMkIk
+      VpcEndpointId: igw-014f7407ce6d6914c
+  EC2VolumeAttachment00vol01fa25710e8a64b4b0069rxF:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::VolumeAttachment
+    DeletionPolicy: Retain
+    Properties:
+      InstanceId: i-013c99ecdd4ba670a
+      VolumeId: vol-01fa25710e8a64b4b
+      Device: /dev/xvda
+  EC2NetworkInterfaceAttachment00eniattach05979ec8ee500caa500SRsmB:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::NetworkInterfaceAttachment
+    DeletionPolicy: Retain
+    Properties:
+      NetworkInterfaceId: eni-06ffba69f517448b5
+      InstanceId: i-0f4c36e62c9edfd35
+      DeviceIndex: '0'
+      DeleteOnTermination: true
+  EC2SecurityGroup00sg06f75d7e668ff1a0f00PlMgU:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::SecurityGroup
+    DeletionPolicy: Retain
+    Properties:
+      GroupDescription: Private_subnet_1
+      GroupName: Private_subnet_1
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          SourceSecurityGroupId: sg-04f0952369daf5d5c
+          ToPort: 22
+          SourceSecurityGroupOwnerId: '122610520005'
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: '-1'
+          FromPort: -1
+          ToPort: -1
+  EC2RouteTable00rtb0d06ddd97b897dd4800zMJKD:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::RouteTable
+    DeletionPolicy: Retain
+    Properties:
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      Tags:
+        - Value: Public_subnet_rt
+          Key: Name
+  EC2SecurityGroup00sg04f0952369daf5d5c00Knhf4:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::SecurityGroup
+    DeletionPolicy: Retain
+    Properties:
+      GroupDescription: Jump-box-security-group
+      GroupName: Jump-box-sg
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      SecurityGroupIngress:
+        - CidrIp: 93.89.244.63/32
+          IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: '-1'
+          FromPort: -1
+          ToPort: -1
+  EC2KeyPair00privatesubnet00EvU6W:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::KeyPair
+    DeletionPolicy: Retain
+    Properties:
+      KeyName: private-subnet
+      KeyType: rsa
+      PublicKeyMaterial: |
+        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8ZitXwguVn8jswFMkXiQRNUjqA7Fq9MdysTZSOiVLQdJw0eK7ECdNnSBjMKl7aURXRTe21xrRYkk7PcAf/ds1LZ8Engj4tawL9H9Mt8KIOrUQGf8iLwxUcrLgSS1cQOtw2l+NU+i55suW78VkHDNm1zhbvxO4uJRNz7HZdzkHNFVY64wgrkw12r55by5z006935j6klxZ2YRSlW/yake5F+v7WLC0KQzZLM0wkZ4pCDxpo/o+E4ks6BWdtFKnh/bA1tPTaD95Y9Xqp0UTUDiMdPw4IDg6A9/hjZAIegAto1ThHZb351DMAMS4vfuPt0UsZ0AhLtGtpWHfrC5KbVGp private-subnet
+      Tags: []
+  EC2NetworkAcl00acl05bf862660ae0ce9e00PNkbi:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::NetworkAcl
+    DeletionPolicy: Retain
+    Properties:
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      Tags: []
+  EC2SubnetNetworkAclAssociation00aclassoc07cd4df7807bbbbe000af15O:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    DeletionPolicy: Retain
+    Properties:
+      NetworkAclId: !Ref EC2NetworkAcl00acl05bf862660ae0ce9e00PNkbi
+      SubnetId: !Ref EC2Subnet00subnet0540d43c0f119dacd00s9TPv
+  EC2Subnet00subnet0cc4665066b38a52f00vKUq3:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Subnet
+    DeletionPolicy: Retain
+    Properties:
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      MapPublicIpOnLaunch: false
+      EnableDns64: false
+      AvailabilityZoneId: euw1-az1
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+        EnableResourceNameDnsAAAARecord: false
+      CidrBlock: 10.0.0.16/28
+      Ipv6Native: false
+      Tags:
+        - Value: Privat_Subnet_2
+          Key: Name
+  EC2Volume00vol0e02095bc65b7bd9700FLIHC:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Volume
+    DeletionPolicy: Retain
+    Properties:
+      MultiAttachEnabled: false
+      SnapshotId: snap-04ebb579391521077
+      VolumeType: gp3
+      Encrypted: false
+      Size: 8
+      AutoEnableIO: true
+      AvailabilityZone: eu-west-1a
+      Throughput: 125
+      Iops: 3000
+      Tags: []
+  EC2NetworkInterface00eni06ffba69f517448b500zpYti:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::NetworkInterface
+    DeletionPolicy: Retain
+    Properties:
+      Description: ''
+      PrivateIpAddress: 10.0.0.14
+      PrivateIpAddresses:
+        - PrivateIpAddress: 10.0.0.14
+          Primary: true
+      SecondaryPrivateIpAddressCount: 0
+      Ipv6PrefixCount: 0
+      Ipv4Prefixes: []
+      Ipv4PrefixCount: 0
+      GroupSet:
+        - sg-04f0952369daf5d5c
+      Ipv6Prefixes: []
+      SubnetId: !Ref EC2Subnet00subnet0540d43c0f119dacd00s9TPv
+      SourceDestCheck: true
+      InterfaceType: interface
+      Tags: []
+  EC2Route00rtb0d06ddd97b897dd4800LyR2E:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Route
+    DeletionPolicy: Retain
+    Properties:
+      RouteTableId: !Ref EC2RouteTable00rtb0d06ddd97b897dd4800zMJKD
+      DestinationCidrBlock: !GetAtt EC2VPC00vpc026dccf46393269f9008cTvV.CidrBlock
+      GatewayId: local
+      VpcEndpointId: local
+  EC2VPC00vpc026dccf46393269f9008cTvV:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::VPC
+    DeletionPolicy: Retain
+    Properties:
+      CidrBlock: 10.0.0.0/27
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      EnableDnsHostnames: false
+      Tags:
+        - Value: FridayHITT
+          Key: Name
+  EC2DHCPOptions00dopt0dcc0aaeffd3def4a00BMfWE:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::DHCPOptions
+    DeletionPolicy: Retain
+    Properties:
+      DomainName: eu-west-1.compute.internal
+      DomainNameServers:
+        - AmazonProvidedDNS
+      Tags: []
+  EC2InternetGateway00igw014f7407ce6d6914c00fMkIk:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::InternetGateway
+    DeletionPolicy: Retain
+    Properties:
+      Tags:
+        - Value: FridayHitt_internet_gateway
+          Key: Name
+  EC2SubnetRouteTableAssociation00rtbassoc0bdbfe3613947dc3600nOXG7:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    DeletionPolicy: Retain
+    Properties:
+      RouteTableId: !Ref EC2RouteTable00rtb0d06ddd97b897dd4800zMJKD
+      SubnetId: !Ref EC2Subnet00subnet0540d43c0f119dacd00s9TPv
+  EC2SubnetNetworkAclAssociation00aclassoc0a08cfa53d234154e00b8IJL:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    DeletionPolicy: Retain
+    Properties:
+      NetworkAclId: !Ref EC2NetworkAcl00acl05bf862660ae0ce9e00PNkbi
+      SubnetId: !Ref EC2Subnet00subnet0cc4665066b38a52f00vKUq3
+  EC2Subnet00subnet0540d43c0f119dacd00s9TPv:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Subnet
+    DeletionPolicy: Retain
+    Properties:
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      MapPublicIpOnLaunch: false
+      EnableDns64: false
+      AvailabilityZoneId: euw1-az1
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+        EnableResourceNameDnsAAAARecord: false
+      CidrBlock: 10.0.0.0/28
+      Ipv6Native: false
+      Tags:
+        - Value: Public_subnet_1
+          Key: Name
+  EC2Volume00vol01fa25710e8a64b4b005r6MI:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::Volume
+    DeletionPolicy: Retain
+    Properties:
+      MultiAttachEnabled: false
+      SnapshotId: snap-04ebb579391521077
+      VolumeType: gp3
+      Encrypted: false
+      Size: 8
+      AutoEnableIO: true
+      AvailabilityZone: eu-west-1a
+      Throughput: 125
+      Iops: 3000
+      Tags: []
+  EC2NetworkInterfaceAttachment00eniattach0a9e695de3b28786500Oqse4:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::NetworkInterfaceAttachment
+    DeletionPolicy: Retain
+    Properties:
+      NetworkInterfaceId: eni-00c210c0fb9f39c59
+      InstanceId: i-013c99ecdd4ba670a
+      DeviceIndex: '0'
+      DeleteOnTermination: true
+  EC2VPCDHCPOptionsAssociation00vpc026dccf46393269f900QRXUM:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::VPCDHCPOptionsAssociation
+    DeletionPolicy: Retain
+    Properties:
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      DhcpOptionsId: !Ref EC2DHCPOptions00dopt0dcc0aaeffd3def4a00BMfWE
+  EC2RouteTable00rtb0f506f4175b3f831a00mKq7T:
+    UpdateReplacePolicy: Retain
+    Type: AWS::EC2::RouteTable
+    DeletionPolicy: Retain
+    Properties:
+      VpcId: !Ref EC2VPC00vpc026dccf46393269f9008cTvV
+      Tags:
+        - Value: private_subnet_rt
+          Key: Name
